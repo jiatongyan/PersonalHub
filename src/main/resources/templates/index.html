@@ -1,25 +1,57 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+
 
 <head>
+
     <meta charset="UTF-8">
-    <title>Dylan Yan</title>
+
+    <title>
+        个人主页
+    </title>
+
 </head>
 
 
 <body>
 
 
-<h1>
-    欢迎来到我的个人主页
+<h1 th:text="${person.name}">
+    Dylan
 </h1>
 
 
-<p>
+
+<h2 th:text="${person.title}">
     AI Engineer
+</h2>
+
+
+
+<p th:text="${person.description}">
+    介绍
 </p>
 
 
+
+<p>
+    Email:
+    <span th:text="${person.email}">
+</span>
+</p>
+
+
+
+<p>
+    Github:
+    <span th:text="${person.github}">
+</span>
+</p>
+
+
+
 </body>
+
 
 </html>
