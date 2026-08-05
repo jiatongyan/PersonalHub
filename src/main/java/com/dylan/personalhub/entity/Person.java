@@ -22,6 +22,12 @@ public class Person {
     private String description;
 
 
+    private String about;
+
+
+    private String label;
+
+
     private String email;
 
 

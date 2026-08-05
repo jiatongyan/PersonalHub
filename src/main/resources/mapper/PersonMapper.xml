@@ -16,6 +16,8 @@
         name,
         title,
         description,
+        about,
+        label,
         email,
         github,
         avatar,

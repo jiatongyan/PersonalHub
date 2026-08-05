@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="zh-CN"
-      xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
     <meta charset="UTF-8">
 
     <title>
-        个人主页
+        PersonalHub
     </title>
+
+
+    <link rel="stylesheet" href="/css/style.css">
+
 
 </head>
 
@@ -17,37 +19,408 @@
 <body>
 
 
-<h1 th:text="${person.name}">
-    Dylan
-</h1>
+<!-- 导航 -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        PersonalHub
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="#about">
+            About
+        </a>
+
+        <a href="#resume">
+            Resume
+        </a>
+
+
+        <a href="#project">
+            Projects
+        </a>
+
+
+        <a href="#blog">
+            Blog
+        </a>
+
+        <a href="#contact">
+            Contact
+        </a>
+
+    </div>
+
+
+</nav>
 
 
 
-<h2 th:text="${person.title}">
-    AI Engineer
-</h2>
+<!-- 首页 Hero -->
+
+<!-- 首页 Hero -->
+
+<section class="hero">
+
+
+    <div class="hero-content">
+
+
+        <h1 th:text="${person.name}">
+            Dylan Yan <!--默认名称-->
+        </h1>
+
+
+        <h2 th:text="${person.title}">
+            AI Engineer
+        </h2>
 
 
 
-<p th:text="${person.description}">
-    介绍
-</p>
+        <p th:text="${person.about}">
+            关注人工智能，同时探索历史、文学与电影。
+        </p>
 
 
 
-<p>
-    Email:
-    <span th:text="${person.email}">
-</span>
-</p>
+        <div class="buttons">
+
+
+            <a href="#resume">
+
+                <button>
+                    查看简历
+                </button>
+
+            </a>
 
 
 
-<p>
-    Github:
-    <span th:text="${person.github}">
-</span>
-</p>
+            <a href="#blog">
+
+                <button class="secondary">
+                    阅读博客
+                </button>
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+    <div class="hero-image">
+
+
+        <img class="avatar"
+
+             th:src="${person.avatar}"
+
+             src="/images/avatar.png"> <!--默认图片-->
+
+
+    </div>
+
+
+
+</section>
+
+
+
+
+
+<!-- 关于 -->
+
+<section id="about">
+
+
+    <h2>
+        关于我
+    </h2>
+
+
+
+    <p th:text="${person.description}">
+        我是一名关注人工智能的软件工程师。
+        兴趣横跨技术、历史、文学、电影。
+    </p>
+
+
+
+
+    <!-- 动态标签 -->
+
+    <div class="tags">
+
+
+        <span th:each="tag : ${#strings.arraySplit(person.label, ',')}"
+              th:text="${tag}">
+            Deep Learning <!-- 数据库中标签按照‘，’分割动态展示-->
+        </span>
+
+
+    </div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- 经历 -->
+
+<section id="resume">
+
+
+    <h2>
+        经历
+    </h2>
+
+
+
+    <!--
+        暂时静态展示
+
+        后续 Phase 2:
+        education + experience 表接入数据库
+    -->
+
+
+    <div class="timeline">
+
+
+        <div>
+
+            <h3>
+                2025 - Now
+            </h3>
+
+
+            <p>
+                美团
+            </p>
+
+
+            <p>
+                支付服务端软件工程师
+            </p>
+
+
+        </div>
+
+
+
+        <div>
+
+            <h3>
+                2023 - 2026
+            </h3>
+
+
+            <p>
+                中国地质大学（北京）
+            </p>
+
+
+            <p>
+                管理科学与工程
+            </p>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- 项目 -->
+
+
+<section id="project">
+
+
+    <h2>
+        项目
+    </h2>
+
+
+
+    <!--
+        后续 Phase 3:
+        project 表动态展示
+    -->
+
+
+    <div class="card">
+
+
+        <h3>
+            PersonalHub
+        </h3>
+
+
+
+        <p>
+
+            个人数字中枢系统
+
+            <br>
+
+            Spring Boot
+            +
+            MySQL
+            +
+            MyBatis
+
+        </p>
+
+
+    </div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- 博客 -->
+
+
+<section id="blog">
+
+
+    <h2>
+        博客
+    </h2>
+
+
+
+    <!--
+        后续 Phase 4:
+        article 表动态展示
+    -->
+
+
+
+    <div class="card">
+
+
+        <h3>
+            深度学习学习笔记
+        </h3>
+
+
+        <p>
+            Transformer、LLM、AI实践
+        </p>
+
+
+    </div>
+
+
+
+
+
+    <div class="card">
+
+
+        <h3>
+            历史与电影思考
+        </h3>
+
+
+        <p>
+            阅读和观影记录
+        </p>
+
+
+    </div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- 联系方式 -->
+
+
+<section id="contact">
+
+
+    <h2>
+        联系方式
+    </h2>
+
+
+
+    <p>
+
+        GitHub:
+
+        <a th:href="${person.github}"
+           th:text="${person.github}">
+            Github
+        </a>
+
+    </p>
+
+
+
+    <p>
+
+        Email:
+
+        <span th:text="${person.email}">
+            email@example.com
+        </span>
+
+    </p>
+
+
+
+</section>
+
+
+
+
+
+
+<footer>
+
+
+    <p>
+        PersonalHub © 2026
+    </p>
+
+
+</footer>
 
 
 
