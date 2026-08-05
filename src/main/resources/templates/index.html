@@ -54,19 +54,37 @@
 <!-- 经历 -->
 <section id="resume">
     <h2>经历</h2>
+
+    <h3>教育经历</h3>
     <div class="timeline">
         <div th:each="edu : ${educations}">
-            <h3>
-                <span th:text="${#temporals.format(edu.startTime,'yyyy-MM')}">2023-09</span>
+            <h4 th:text="${edu.school}">学校</h4>
+            <p>
+                <span th:text="${#temporals.format(edu.startTime, 'yyyy-MM')}">2023-09</span>
                 ——
-                <span th:text="${#temporals.format(edu.endTime,'yyyy-MM')}">2026-06</span>
-            </h3>
-            <h4 th:text="${edu.school}">中国地质大学（北京）</h4>
-            <p th:text="${edu.major}">管理科学与工程</p>
-            <p th:text="${edu.description}">学习人工智能相关内容</p>
+                <span th:text="${#temporals.format(edu.endTime, 'yyyy-MM')}">2026-06</span>
+            </p>
+            <p th:text="${edu.major}">专业</p>
         </div>
+    </div>
 
+    <hr>
 
+    <h3>工作经历</h3>
+    <div class="timeline">
+        <div th:each="exp : ${experiences}">
+            <h4 th:text="${exp.company}">公司</h4>
+            <p th:text="${exp.department}">部门</p>
+            <p>
+                <span th:text="${#temporals.format(exp.startTime, 'yyyy-MM')}">2025-07</span>
+                ——
+                <span th:if="${exp.endTime != null}"
+                      th:text="${#temporals.format(exp.endTime, 'yyyy-MM')}">2026-07</span>
+                <span th:if="${exp.endTime == null}">至今</span>
+            </p>
+            <p th:text="${exp.position}">职位</p>
+            <p th:text="${exp.description}">工作内容</p>
+        </div>
     </div>
 </section>
 

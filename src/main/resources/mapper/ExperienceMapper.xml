@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.dylan.personalhub.mapper.ExperienceMapper">
+
+
+    <select id="findAll"
+            resultType="com.dylan.personalhub.entity.Experience">
+
+
+        SELECT
+
+            id,
+
+            company,
+
+            department,
+
+            position,
+
+            start_time,
+
+            end_time,
+
+            description
+
+
+        FROM experience
+
+
+        ORDER BY start_time DESC
+
+
+    </select>
+
+
+</mapper>
