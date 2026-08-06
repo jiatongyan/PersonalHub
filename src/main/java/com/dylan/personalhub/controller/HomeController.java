@@ -15,19 +15,22 @@ public class HomeController {
     private final ExperienceService experienceService;
     private final SkillService skillService;
     private final ProjectService projectService;
+    private final ArticleService articleService;
 
     public HomeController(
             PersonService personService,
             EducationService educationService,
             ExperienceService experienceService,
             SkillService skillService,
-            ProjectService projectService
+            ProjectService projectService,
+            ArticleService articleService
     ){
         this.personService = personService;
         this.educationService = educationService;
         this.experienceService = experienceService;
         this.skillService = skillService;
         this.projectService = projectService;
+        this.articleService = articleService;
     }
 
 
@@ -60,6 +63,11 @@ public class HomeController {
         model.addAttribute(
                 "projects",
                 projectService.getAll()
+        );
+
+        model.addAttribute(
+                "articles",
+                articleService.getAll()
         );
 
         return "index";

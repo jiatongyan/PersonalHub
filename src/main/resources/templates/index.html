@@ -118,22 +118,23 @@
             <a th:href="${project.githubUrl}">Github</a>
         </div>
     </div>
-
-
 </section>
+
+
 <!-- 博客 -->
 <section id="blog">
     <h2>博客</h2>
-    <!-- 后续 Phase 4: article 表动态展示 -->
-    <div class="card">
-        <h3>深度学习学习笔记</h3>
-        <p>Transformer、LLM、AI实践</p>
-    </div>
-    <div class="card">
-        <h3>历史与电影思考</h3>
-        <p>阅读和观影记录</p>
+    <div class="projects">
+        <div class="card" th:each="article:${articles}">
+            <img th:src="${article.cover}" class="project-image">
+            <h3 th:text="${article.title}">文章标题</h3>
+            <p th:text="${article.summary}">摘要</p>
+            <span th:text="${article.category}">AI</span>
+            <a th:href="@{'/article/'+${article.id}}">阅读</a>
+        </div>
     </div>
 </section>
+
 
 <!-- 联系方式 -->
 <section id="contact">

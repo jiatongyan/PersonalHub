@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${article.title}">文章</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+
+<body>
+<section>
+    <h1 th:text="${article.title}">标题</h1>
+    <p th:text="${article.summary}">摘要</p>
+    <hr>
+    <div th:text="${article.content}">正文</div>
+</section>
+</body>
+
+
+</html>
+
