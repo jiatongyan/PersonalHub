@@ -8,7 +8,10 @@ html {
 
 body {
     margin: 0;
-    font-family: "Inter", "Microsoft YaHei", sans-serif;
+    font-family:
+            "Inter",
+            "Microsoft YaHei",
+            sans-serif;
     color: #222;
     background: #fafafa;
 }
@@ -59,8 +62,6 @@ body {
     padding: 0 12%;
     gap: 80px;
 }
-
-/* 左侧文字区域 */
 
 .hero-content {
     max-width: 650px;
@@ -129,7 +130,7 @@ button.secondary {
 }
 
 /* =====================
-   通用 section
+   通用 Section
 ===================== */
 
 section {
@@ -155,20 +156,58 @@ h2 {
 }
 
 /* =====================
-   卡片
+   Resume 时间线
 ===================== */
 
-.card {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    margin: 20px 0;
+.timeline {
+    position: relative;
+    margin: 50px 0;
 }
 
-.card a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #ddd;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 50px;
+    margin-bottom: 50px;
+}
+
+.timeline-date {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 4px 14px;
+    background: #f0f0f0;
+    border-radius: 20px;
+    color: #888;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 12px;
+    top: 8px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #222;
+    border: 3px solid #fafafa;
+}
+
+.timeline-content {
+    background: white;
+    padding: 25px 30px;
+    border-radius: 15px;
+    box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
 /* =====================
@@ -177,7 +216,8 @@ h2 {
 
 .skills {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns:
+            repeat(auto-fit, minmax(220px, 1fr));
     gap: 25px;
 }
 
@@ -197,13 +237,27 @@ h2 {
 }
 
 /* =====================
-   项目卡片
+   项目
 ===================== */
 
 .projects {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns:
+            repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin: 20px 0;
+}
+
+.card a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
 }
 
 .project-image {
@@ -224,7 +278,7 @@ footer {
 }
 
 /* =====================
-   移动端适配
+   移动端
 ===================== */
 
 @media (max-width: 900px) {
@@ -258,5 +312,18 @@ footer {
 
     section {
         padding: 70px 8%;
+    }
+
+    /* 时间线移动端 */
+    .timeline::before {
+        left: 12px;
+    }
+
+    .timeline-item {
+        padding-left: 32px;
+    }
+
+    .timeline-dot {
+        left: 4px;
     }
 }

@@ -55,48 +55,67 @@
 <section id="resume">
     <h2>经历</h2>
 
+    <!-- 教育经历 -->
     <h3>教育经历</h3>
     <div class="timeline">
-        <div th:each="edu : ${educations}">
-            <h4 th:text="${edu.school}">学校</h4>
-            <p>
-                <span th:text="${#temporals.format(edu.startTime, 'yyyy-MM')}">2023-09</span>
-                ——
-                <span th:text="${#temporals.format(edu.endTime, 'yyyy-MM')}">2026-06</span>
-            </p>
-            <p th:text="${edu.major}">专业</p>
+        <div class="timeline-item" th:each="edu:${educations}">
+            <!-- 圆点 -->
+            <div class="timeline-dot"></div>
+            <!-- 内容 -->
+            <div class="timeline-content">
+                <div class="timeline-date">
+                    <span th:text="${#temporals.format(edu.startTime,'yyyy-MM')}">2023-09</span>
+                    -
+                    <span th:text="${#temporals.format(edu.endTime,'yyyy-MM')}">2026-06</span>
+                </div>
+                <h4 th:text="${edu.school}">中国地质大学（北京）</h4>
+                <h5>
+                    <span th:text="${edu.degree}">硕士</span>
+                    ·
+                    <span th:text="${edu.major}">管理科学与工程</span>
+                </h5>
+
+                <p th:text="${edu.description}">学习人工智能相关内容</p>
+            </div>
         </div>
     </div>
 
     <hr>
 
+    <!-- 工作经历 -->
     <h3>工作经历</h3>
     <div class="timeline">
-        <div th:each="exp : ${experiences}">
-            <h4 th:text="${exp.company}">公司</h4>
-            <p th:text="${exp.department}">部门</p>
-            <p>
-                <span th:text="${#temporals.format(exp.startTime, 'yyyy-MM')}">2025-07</span>
-                ——
-                <span th:if="${exp.endTime != null}"
-                      th:text="${#temporals.format(exp.endTime, 'yyyy-MM')}">2026-07</span>
-                <span th:if="${exp.endTime == null}">至今</span>
-            </p>
-            <p th:text="${exp.position}">职位</p>
-            <p th:text="${exp.description}">工作内容</p>
+        <div class="timeline-item" th:each="exp:${experiences}">
+            <!-- 点 -->
+            <div class="timeline-dot"></div>
+            <!-- 内容 -->
+            <div class="timeline-content">
+                <div class="timeline-date">
+                    <span th:text="${#temporals.format(exp.startTime,'yyyy-MM')}">2025-07</span>
+                    -
+                    <span th:if="${exp.endTime!=null}"
+                          th:text="${#temporals.format(exp.endTime,'yyyy-MM')}">2026-07</span>
+                    <span th:if="${exp.endTime==null}">至今</span>
+                </div>
+                <h4 th:text="${exp.company}">美团</h4>
+                <h5>
+                    <span th:text="${exp.department}">支付平台部</span>
+                    ·
+                    <span th:text="${exp.position}">服务端软件工程师</span>
+                </h5>
+                <p th:text="${exp.description}">工作内容</p>
+            </div>
         </div>
     </div>
 
+    <!-- 技能 -->
     <h3>技能</h3>
     <div class="skills">
-        <div class="skill-card"
-             th:each="skill:${skills}">
+        <div class="skill-card" th:each="skill:${skills}">
             <h4 th:text="${skill.name}">Java</h4>
             <p th:text="${skill.category}">Backend</p>
             <p>
-            <span th:each="i:${#numbers.sequence(1,skill.level)}">
-                ⭐
-            </span>
+                <span th:each="i:${#numbers.sequence(1,skill.level)}">⭐</span>
             </p>
             <small th:text="${skill.description}">技能描述</small>
         </div>
@@ -107,10 +126,10 @@
 <section id="project">
     <h2>项目</h2>
     <div class="projects">
-        <div class="card"
-             th:each="project:${projects}">
+        <div class="card" th:each="project:${projects}">
             <img th:src="${project.image}"
-                 class="project-image">
+                 class="project-image"
+                 alt="project">
             <h3 th:text="${project.name}">PersonalHub</h3>
             <p th:text="${project.description}">项目介绍</p>
             <p>技术栈：<span th:text="${project.techStack}">Spring Boot</span></p>
@@ -120,13 +139,14 @@
     </div>
 </section>
 
-
 <!-- 博客 -->
 <section id="blog">
     <h2>博客</h2>
     <div class="projects">
         <div class="card" th:each="article:${articles}">
-            <img th:src="${article.cover}" class="project-image">
+            <img th:src="${article.cover}"
+                 class="project-image"
+                 alt="cover">
             <h3 th:text="${article.title}">文章标题</h3>
             <p th:text="${article.summary}">摘要</p>
             <span th:text="${article.category}">AI</span>
@@ -134,7 +154,6 @@
         </div>
     </div>
 </section>
-
 
 <!-- 联系方式 -->
 <section id="contact">
