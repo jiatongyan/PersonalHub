@@ -9,7 +9,7 @@
 
 <!-- 导航 -->
 <nav class="navbar">
-    <div class="logo">PersonalHub</div>
+    <div class="logo">DylanPersonalHub</div>
     <div class="nav-links">
         <a href="#about">About</a>
         <a href="#resume">Resume</a>
@@ -84,6 +84,21 @@
             </p>
             <p th:text="${exp.position}">职位</p>
             <p th:text="${exp.description}">工作内容</p>
+        </div>
+    </div>
+
+    <h3>技能</h3>
+    <div class="skills">
+        <div class="skill-card"
+             th:each="skill:${skills}">
+            <h4 th:text="${skill.name}">Java</h4>
+            <p th:text="${skill.category}">Backend</p>
+            <p>
+            <span th:each="i:${#numbers.sequence(1,skill.level)}">
+                ⭐
+            </span>
+            </p>
+            <small th:text="${skill.description}">技能描述</small>
         </div>
     </div>
 </section>

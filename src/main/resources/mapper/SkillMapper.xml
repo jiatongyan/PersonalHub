@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.dylan.personalhub.mapper.SkillMapper">
+
+
+    <select id="findAll"
+            resultType="com.dylan.personalhub.entity.Skill">
+
+
+        SELECT
+
+            id,
+
+            name,
+
+            level,
+
+            category,
+
+            description
+
+
+        FROM skill
+
+
+        ORDER BY level DESC
+
+
+    </select>
+
+
+</mapper>
