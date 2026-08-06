@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.dylan.personalhub.mapper.ProjectMapper">
+
+
+    <select id="findAll"
+            resultType="com.dylan.personalhub.entity.Project">
+
+
+        SELECT
+
+            id,
+
+            name,
+
+            description,
+
+            tech_stack,
+
+            github_url,
+
+            image,
+
+            category,
+
+            status,
+
+            create_time
+
+
+        FROM project
+
+
+        ORDER BY create_time DESC
+
+
+    </select>
+
+
+</mapper>

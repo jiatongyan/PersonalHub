@@ -1,9 +1,6 @@
 package com.dylan.personalhub.controller;
 
-import com.dylan.personalhub.service.EducationService;
-import com.dylan.personalhub.service.ExperienceService;
-import com.dylan.personalhub.service.PersonService;
-import com.dylan.personalhub.service.SkillService;
+import com.dylan.personalhub.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,17 +14,20 @@ public class HomeController {
     private final EducationService educationService;
     private final ExperienceService experienceService;
     private final SkillService skillService;
+    private final ProjectService projectService;
 
     public HomeController(
             PersonService personService,
             EducationService educationService,
             ExperienceService experienceService,
-            SkillService skillService
+            SkillService skillService,
+            ProjectService projectService
     ){
         this.personService = personService;
         this.educationService = educationService;
         this.experienceService = experienceService;
         this.skillService = skillService;
+        this.projectService = projectService;
     }
 
 
@@ -55,6 +55,11 @@ public class HomeController {
         model.addAttribute(
                 "skills",
                 skillService.getAll()
+        );
+
+        model.addAttribute(
+                "projects",
+                projectService.getAll()
         );
 
         return "index";

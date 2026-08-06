@@ -106,17 +106,21 @@
 <!-- 项目 -->
 <section id="project">
     <h2>项目</h2>
-    <!-- 后续 Phase 3: project 表动态展示 -->
-    <div class="card">
-        <h3>PersonalHub</h3>
-        <p>
-            个人数字中枢系统
-            <br>
-            Spring Boot + MySQL + MyBatis
-        </p>
+    <div class="projects">
+        <div class="card"
+             th:each="project:${projects}">
+            <img th:src="${project.image}"
+                 class="project-image">
+            <h3 th:text="${project.name}">PersonalHub</h3>
+            <p th:text="${project.description}">项目介绍</p>
+            <p>技术栈：<span th:text="${project.techStack}">Spring Boot</span></p>
+            <p>状态：<span th:text="${project.status}">Developing</span></p>
+            <a th:href="${project.githubUrl}">Github</a>
+        </div>
     </div>
-</section>
 
+
+</section>
 <!-- 博客 -->
 <section id="blog">
     <h2>博客</h2>
