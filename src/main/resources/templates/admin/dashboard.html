@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>PersonalHub Admin</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+<!-- 侧边栏 -->
+<div class="sidebar">
+    <h2>PersonalHub</h2>
+    <p>Admin</p>
+    <ul>
+        <li><a href="/admin/dashboard">首页</a></li>
+        <li><a href="#">个人信息</a></li>
+        <li><a href="#">教育经历</a></li>
+        <li><a href="#">工作经历</a></li>
+        <li><a href="#">技能管理</a></li>
+        <li><a href="#">项目管理</a></li>
+        <li><a href="#">博客管理</a></li>
+    </ul>
+</div>
+
+<!-- 主内容 -->
+<div class="content">
+    <h1>Dashboard</h1>
+    <p>欢迎进入 PersonalHub 管理后台</p>
+
+    <div class="cards">
+        <div class="card">
+            <h3>个人信息</h3>
+            <p>管理首页展示内容</p>
+            <a href="#">进入</a>
+        </div>
+
+        <div class="card">
+            <h3>教育经历</h3>
+            <p>管理 Education</p>
+            <a href="#">进入</a>
+        </div>
+
+        <div class="card">
+            <h3>工作经历</h3>
+            <p>管理 Experience</p>
+            <a href="#">进入</a>
+        </div>
+
+        <div class="card">
+            <h3>技能</h3>
+            <p>管理 Skill</p>
+            <a href="#">进入</a>
+        </div>
+
+        <div class="card">
+            <h3>项目</h3>
+            <p>管理 Project</p>
+            <a href="#">进入</a>
+        </div>
+
+        <div class="card">
+            <h3>博客文章</h3>
+            <p>Markdown文章管理</p>
+            <a href="/admin/article">进入</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

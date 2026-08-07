@@ -11,4 +11,6 @@ public interface ArticleMapper {
 
     Article findById(Long id);
 
+    void insert(Article article);
+
 }

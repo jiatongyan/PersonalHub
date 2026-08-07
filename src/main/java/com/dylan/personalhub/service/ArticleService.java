@@ -34,5 +34,19 @@ public class ArticleService {
 
     }
 
+    public List<Article> findAll(){
+
+        return articleMapper.findAll();
+
+    }
+
+
+
+    public void save(Article article){
+
+        articleMapper.insert(article);
+
+    }
+
 
 }

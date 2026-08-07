@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Markdown编辑</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
+</head>
+<body>
+<div class="content">
+    <h1>新增文章</h1>
+
+    <form method="post" action="/admin/article/save">
+        <input name="title"
+               placeholder="文章标题"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <input name="summary"
+               placeholder="文章摘要"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <input name="cover"
+                placeholder="文章封面图片地址"
+                style="width:100%;padding:15px">
+        <br><br>
+
+        <input name="category"
+               placeholder="分类，例如 AI / 历史"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <textarea id="content" name="content"></textarea>
+        <br>
+
+        <button>保存</button>
+    </form>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+    <script>
+        let editor = new EasyMDE({
+            element: document.getElementById("content"),
+            spellChecker: false,
+            toolbar: [
+                "bold",
+                "italic",
+                "heading",
+                "|",
+                "quote",
+                "unordered-list",
+                "ordered-list",
+                "|",
+                "link",
+                {
+                    name: "upload-image",
+                    action: function (editor) {
+                        let input = document.createElement("input");
+                        input.type = "file";
+                        input.accept = "image/*";
+
+                        input.onchange = function () {
+                            let file = input.files[0];
+                            let formData = new FormData();
+                            formData.append("file", file);
+
+                            fetch("/admin/upload/image", {
+                                method: "POST",
+                                body: formData
+                            })
+                            .then(res => res.text())
+                            .then(url => {
+                                let cm = editor.codemirror;
+                                let text = cm.getSelection();
+                                cm.replaceSelection(`![${text || "image"}](${url})`);
+                            });
+                        };
+
+                        input.click();
+                    },
+                    icon: "📷",
+                    title: "上传图片"
+                }
+            ]
+        });
+    </script>
+    </body>
+    </html>

@@ -7,6 +7,28 @@
 
 
 <mapper namespace="com.dylan.personalhub.mapper.ArticleMapper">
+    <insert id="insert">
+        INSERT INTO article
+        (
+            title,
+            summary,
+            content,
+            category,
+            cover,
+            create_time,
+            update_time
+        )
+        VALUES
+            (
+                #{title},
+                #{summary},
+                #{content},
+                #{category},
+                #{cover},
+                NOW(),
+                NOW()
+            )
+    </insert>
 
 
     <select id="findAll"
@@ -14,26 +36,16 @@
 
 
         SELECT
-
             id,
-
             title,
-
             summary,
-
             content,
-
             category,
-
             cover,
-
             create_time,
-
             update_time
 
-
         FROM article
-
 
         ORDER BY create_time DESC
 
@@ -49,24 +61,15 @@
         SELECT
 
             id,
-
             title,
-
             summary,
-
             content,
-
             category,
-
             cover,
-
             create_time,
-
             update_time
 
-
         FROM article
-
 
         WHERE id=#{id}
 
