@@ -10,14 +10,17 @@
 
 
 <body>
+
 <section>
     <h1 th:text="${article.title}">标题</h1>
-    <p th:text="${article.summary}">摘要</p>
+    <p>
+        分类：
+        <span th:text="${article.category}">AI</span>
+    </p>
     <hr>
-    <div th:text="${article.content}">正文</div>
+    <div class="markdown-body" th:utext="${content}"></div>
 </section>
+
 </body>
 
-
 </html>
-
