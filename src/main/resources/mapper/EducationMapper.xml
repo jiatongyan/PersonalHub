@@ -29,5 +29,66 @@
 
     </select>
 
+    <select id="findById"
+            resultType="com.dylan.personalhub.entity.Education">
+
+        SELECT
+
+            id,
+            school,
+            major,
+            degree,
+            start_time,
+            end_time,
+            description
+
+        FROM education
+
+        WHERE id = #{id}
+
+    </select>
+
+
+    <insert id="insert">
+        INSERT INTO education
+        (
+            school,
+            major,
+            degree,
+            start_time,
+            end_time,
+            description
+        )
+        VALUES
+            (
+                #{school},
+                #{major},
+                #{degree},
+                #{startTime},
+                #{endTime},
+                #{description}
+            )
+    </insert>
+
+
+    <update id="update">
+        UPDATE education
+        SET
+            school      = #{school},
+            major       = #{major},
+            degree      = #{degree},
+            start_time  = #{startTime},
+            end_time    = #{endTime},
+            description = #{description}
+        WHERE id = #{id}
+    </update>
+
+
+    <delete id="deleteById">
+        DELETE FROM education
+        WHERE id = #{id}
+    </delete>
+
+
 
 </mapper>

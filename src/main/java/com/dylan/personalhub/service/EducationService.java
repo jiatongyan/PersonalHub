@@ -24,10 +24,33 @@ public class EducationService {
     }
 
 
-
     public List<Education> getAll(){
 
         return educationMapper.findAll();
+
+    }
+
+    public Education getById(Long id){
+
+        return educationMapper.findById(id);
+
+    }
+
+    public void save(Education education){
+
+        educationMapper.insert(education);
+
+    }
+
+    public void update(Education education){
+
+        educationMapper.update(education);
+
+    }
+
+    public void delete(Long id){
+
+        educationMapper.deleteById(id);
 
     }
 

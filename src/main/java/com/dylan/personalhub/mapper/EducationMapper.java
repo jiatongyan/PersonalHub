@@ -12,5 +12,12 @@ public interface EducationMapper {
 
     List<Education> findAll();
 
+    Education findById(Long id);
+
+    void insert(Education education);
+
+    void update(Education education);
+
+    void deleteById(Long id);
 
 }

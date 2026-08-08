@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>教育经历编辑</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<div class="content">
+    <h1 th:text="${education.id == null ? '新增教育经历' : '编辑教育经历'}">新增教育经历</h1>
+
+    <form method="post" action="/admin/education/save">
+        <input type="hidden" name="id" th:value="${education.id}">
+
+        <label>学校</label>
+        <br><br>
+        <input name="school" th:value="${education.school}"
+               placeholder="学校名称"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <label>专业</label>
+        <br><br>
+        <input name="major" th:value="${education.major}"
+               placeholder="专业"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <label>学历</label>
+        <br><br>
+        <input name="degree" th:value="${education.degree}"
+               placeholder="学历，例如 本科 / 硕士"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <label>开始时间</label>
+        <br><br>
+        <input type="date" name="startTime"
+               th:value="${education.startTime != null ? #temporals.format(education.startTime, 'yyyy-MM-dd') : ''}"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <label>结束时间（留空表示"至今"）</label>
+        <br><br>
+        <input type="date" name="endTime"
+               th:value="${education.endTime != null ? #temporals.format(education.endTime, 'yyyy-MM-dd') : ''}"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <label>描述</label>
+        <br><br>
+        <textarea name="description" th:text="${education.description}"
+                  placeholder="在校经历描述"
+                  style="width:100%;padding:15px"></textarea>
+        <br><br>
+
+        <button>保存</button>
+    </form>
+</div>
+
+</body>
+</html>

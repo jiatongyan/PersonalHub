@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>教育经历管理</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+
+<body>
+
+<div class="content">
+    <h1>教育经历管理</h1>
+    <a href="/admin/education/create"><button>新增教育经历</button></a>
+    <table>
+        <tr>
+            <th>学校</th>
+            <th>专业</th>
+            <th>学历</th>
+            <th>起止时间</th>
+            <th>操作</th>
+        </tr>
+
+        <tr th:each="education:${educations}">
+            <td th:text="${education.school}">学校</td>
+            <td th:text="${education.major}">专业</td>
+            <td th:text="${education.degree}">学历</td>
+            <td>
+                <span th:text="${#temporals.format(education.startTime, 'yyyy-MM-dd')}">2023-09-01</span>
+                -
+                <span th:if="${education.endTime != null}"
+                      th:text="${#temporals.format(education.endTime, 'yyyy-MM-dd')}">2026-06-30</span>
+                <span th:if="${education.endTime == null}">至今</span>
+            </td>
+            <td>
+                <a th:href="@{'/admin/education/edit/' + ${education.id}}">编辑</a>
+                <form th:action="@{'/admin/education/delete/' + ${education.id}}"
+                      method="post"
+                      style="display:inline"
+                      onsubmit="return confirm('确定要删除这条教育经历吗？');">
+                    <button type="submit">删除</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+
+</html>
