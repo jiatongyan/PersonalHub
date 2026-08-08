@@ -80,4 +80,15 @@ public class AdminArticleController {
 
 
 
+        /**
+         * 删除文章
+         */
+        @PostMapping("/delete/{id}")
+        public String delete(@PathVariable Long id){
+
+            articleService.delete(id);
+
+            return "redirect:/admin/article";
+
+        }
 }

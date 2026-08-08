@@ -27,6 +27,12 @@
                 <td th:text="${article.updateTime}">时间</td>
                 <td>
                     <a th:href="@{'/admin/article/edit/' + ${article.id}}">编辑</a>
+                    <form th:action="@{'/admin/article/delete/' + ${article.id}}"
+                          method="post"
+                          style="display:inline"
+                          onsubmit="return confirm('确定要删除这篇文章吗？');">
+                        <button type="submit">删除</button>
+                    </form>
                 </td>
             </tr>
         </table>

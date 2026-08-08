@@ -54,5 +54,11 @@ public class ArticleService {
 
     }
 
+    public void delete(Long id){
+
+        articleMapper.deleteById(id);
+
+    }
+
 
 }

@@ -42,6 +42,11 @@
         WHERE id = #{id}
     </update>
 
+    <delete id="deleteById">
+        DELETE FROM article
+        WHERE id = #{id}
+    </delete>
+
     <select id="findAll"
             resultType="com.dylan.personalhub.entity.Article">
 
