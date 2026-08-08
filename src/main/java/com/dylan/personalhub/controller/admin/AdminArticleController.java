@@ -15,18 +15,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/admin/article")
 public class AdminArticleController {
 
-
     private final ArticleService articleService;
 
-
-    public AdminArticleController(
-            ArticleService articleService
-    ){
-
+    public AdminArticleController(ArticleService articleService){
         this.articleService = articleService;
-
     }
-
 
 
     /**
@@ -38,7 +31,6 @@ public class AdminArticleController {
         model.addAttribute("articles", articleService.findAll());
         return "admin/article/list";
     }
-
 
 
     /**
@@ -55,7 +47,7 @@ public class AdminArticleController {
 
 
     /**
-     * 编辑页面
+     * 显示编辑页面（新增or修改都需要）
      */
     @GetMapping("/edit/{id}")
     public String editPage(
@@ -63,11 +55,7 @@ public class AdminArticleController {
             Model model
     ){
 
-        model.addAttribute(
-                "article",
-                articleService.getById(id)
-        );
-
+        model.addAttribute("article", articleService.getById(id));
         return "admin/article/edit";
 
     }
