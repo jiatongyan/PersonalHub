@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>项目编辑</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<div class="content">
+    <h1 th:text="${project.id == null ? '新增项目' : '编辑项目'}">新增项目</h1>
+
+    <form method="post" action="/admin/project/save">
+        <input type="hidden" name="id" th:value="${project.id}">
+
+        <label>项目名称</label>
+        <br><br>
+        <input name="name" th:value="${project.name}"
+               placeholder="项目名称"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <label>项目描述</label>
+        <br><br>
+        <textarea name="description" th:text="${project.description}"
+                  placeholder="项目描述"
+                  style="width:100%;padding:15px"></textarea>
+        <br><br>
+
+        <label>技术栈</label>
+        <br><br>
+        <input name="techStack" th:value="${project.techStack}"
+               placeholder="技术栈，例如 Spring Boot / Vue"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <label>GitHub 地址</label>
+        <br><br>
+        <input name="githubUrl" th:value="${project.githubUrl}"
+               placeholder="https://github.com/xxx/xxx"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <label>分类</label>
+        <br><br>
+        <input name="category" th:value="${project.category}"
+               placeholder="分类，例如 Web / AI"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <label>状态</label>
+        <br><br>
+        <input name="status" th:value="${project.status}"
+               placeholder="状态，例如 Developing / Done"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <!-- 项目图片：支持手动输入，也支持上传 -->
+        <label>项目图片</label>
+        <br><br>
+        <input id="image" name="image" th:value="${project.image}"
+               placeholder="图片地址（可手动输入，或点击下方按钮上传）"
+               style="width:100%;padding:15px">
+        <br><br>
+        <img id="imagePreview" src="" alt="图片预览"
+             th:if="${project.image != null and !#strings.isEmpty(project.image)}"
+             th:src="${project.image}"
+             style="display:none;max-width:320px;border-radius:12px;margin-bottom:10px">
+        <br>
+        <button type="button" id="uploadImageBtn">上传项目图片</button>
+        <input type="file" id="imageFile" accept="image/*" style="display:none">
+        <br><br>
+
+        <button>保存</button>
+    </form>
+</div>
+
+<script>
+    // ===== 项目图片上传 =====
+    const imageInput = document.getElementById("image");
+    const imageFile = document.getElementById("imageFile");
+    const imagePreview = document.getElementById("imagePreview");
+    const uploadImageBtn = document.getElementById("uploadImageBtn");
+
+    // 编辑时回显已有图片
+    if (imageInput.value) {
+        imagePreview.src = imageInput.value;
+        imagePreview.style.display = "block";
+    }
+
+    uploadImageBtn.addEventListener("click", function () {
+        imageFile.click();
+    });
+
+    imageFile.addEventListener("change", function () {
+        const file = imageFile.files[0];
+        if (!file) {
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        fetch("/admin/upload/image", {
+            method: "POST",
+            body: formData
+        })
+            .then(res => res.text())
+            .then(url => {
+                imageInput.value = url;
+                imagePreview.src = url;
+                imagePreview.style.display = "block";
+            })
+            .catch(err => {
+                alert("图片上传失败：" + err);
+            });
+    });
+</script>
+</body>
+</html>

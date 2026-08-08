@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>项目管理</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+
+<body>
+
+<div class="content">
+    <h1>项目管理</h1>
+    <a href="/admin/project/create"><button>新增项目</button></a>
+    <table>
+        <tr>
+            <th>名称</th>
+            <th>分类</th>
+            <th>状态</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+
+        <tr th:each="project:${projects}">
+            <td th:text="${project.name}">项目名</td>
+            <td th:text="${project.category}">Web</td>
+            <td th:text="${project.status}">Developing</td>
+            <td th:text="${project.createTime}">时间</td>
+            <td>
+                <a th:href="@{'/admin/project/edit/' + ${project.id}}">编辑</a>
+                <form th:action="@{'/admin/project/delete/' + ${project.id}}"
+                      method="post"
+                      style="display:inline"
+                      onsubmit="return confirm('确定要删除这个项目吗？');">
+                    <button type="submit">删除</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+
+</html>

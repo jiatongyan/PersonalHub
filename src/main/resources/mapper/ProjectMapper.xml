@@ -43,4 +43,80 @@
     </select>
 
 
+    <select id="findById"
+            resultType="com.dylan.personalhub.entity.Project">
+
+        SELECT
+
+            id,
+
+            name,
+
+            description,
+
+            tech_stack,
+
+            github_url,
+
+            image,
+
+            category,
+
+            status,
+
+            create_time
+
+        FROM project
+
+        WHERE id = #{id}
+
+    </select>
+
+
+    <insert id="insert">
+        INSERT INTO project
+        (
+            name,
+            description,
+            tech_stack,
+            github_url,
+            image,
+            category,
+            status,
+            create_time
+        )
+        VALUES
+        (
+            #{name},
+            #{description},
+            #{techStack},
+            #{githubUrl},
+            #{image},
+            #{category},
+            #{status},
+            NOW()
+        )
+    </insert>
+
+
+    <update id="update">
+        UPDATE project
+        SET
+            name        = #{name},
+            description = #{description},
+            tech_stack  = #{techStack},
+            github_url  = #{githubUrl},
+            image       = #{image},
+            category    = #{category},
+            status      = #{status}
+        WHERE id = #{id}
+    </update>
+
+
+    <delete id="deleteById">
+        DELETE FROM project
+        WHERE id = #{id}
+    </delete>
+
+
 </mapper>

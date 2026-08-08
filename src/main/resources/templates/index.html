@@ -126,7 +126,10 @@
 <section id="project">
     <h2>项目</h2>
     <div class="projects">
-        <div class="card" th:each="project:${projects}">
+        <a class="card" th:each="project:${projects}"
+           th:href="${project.githubUrl}"
+           target="_blank"
+           rel="noopener noreferrer">
             <img th:src="${project.image}"
                  class="project-image"
                  alt="project">
@@ -134,8 +137,7 @@
             <p th:text="${project.description}">项目介绍</p>
             <p>技术栈：<span th:text="${project.techStack}">Spring Boot</span></p>
             <p>状态：<span th:text="${project.status}">Developing</span></p>
-            <a th:href="${project.githubUrl}">Github</a>
-        </div>
+        </a>
     </div>
 </section>
 

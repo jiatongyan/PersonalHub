@@ -26,4 +26,28 @@ public class ProjectService {
 
     }
 
+    public Project getById(Long id){
+
+        return projectMapper.findById(id);
+
+    }
+
+    public void save(Project project){
+
+        projectMapper.insert(project);
+
+    }
+
+    public void update(Project project){
+
+        projectMapper.update(project);
+
+    }
+
+    public void delete(Long id){
+
+        projectMapper.deleteById(id);
+
+    }
+
 }
