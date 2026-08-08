@@ -145,15 +145,17 @@
 <section id="blog">
     <h2>博客</h2>
     <div class="projects">
-        <div class="card" th:each="article:${articles}">
+        <a class="card" th:each="article:${articles}"
+           th:href="@{'/article/' + ${article.id}}"
+           target="_blank"
+           rel="noopener noreferrer">
             <img th:src="${article.cover}"
                  class="project-image"
                  alt="cover">
             <h3 th:text="${article.title}">文章标题</h3>
             <p th:text="${article.summary}">摘要</p>
             <span th:text="${article.category}">AI</span>
-            <a th:href="@{'/article/'+${article.id}}">阅读</a>
-        </div>
+        </a>
     </div>
 </section>
 

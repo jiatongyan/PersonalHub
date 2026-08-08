@@ -260,7 +260,7 @@ h2 {
     font-weight: bold;
 }
 
-/* 项目卡片整卡可点击 */
+/* 项目、文章卡片整卡可点击 */
 .projects a.card {
     display: block;
     text-decoration: none;
