@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>工作经历编辑</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<div class="content">
+    <h1 th:text="${experience.id == null ? '新增工作经历' : '编辑工作经历'}">新增工作经历</h1>
+
+    <form method="post" action="/admin/experience/save">
+        <input type="hidden" name="id" th:value="${experience.id}">
+
+        <label>公司</label>
+        <br><br>
+        <input name="company" th:value="${experience.company}"
+               placeholder="公司名称"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <label>部门</label>
+        <br><br>
+        <input name="department" th:value="${experience.department}"
+               placeholder="部门"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <label>职位</label>
+        <br><br>
+        <input name="position" th:value="${experience.position}"
+               placeholder="职位"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <label>开始时间</label>
+        <br><br>
+        <input type="date" name="startTime"
+               th:value="${experience.startTime != null ? #temporals.format(experience.startTime, 'yyyy-MM-dd') : ''}"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <label>结束时间（留空表示"至今"）</label>
+        <br><br>
+        <input type="date" name="endTime"
+               th:value="${experience.endTime != null ? #temporals.format(experience.endTime, 'yyyy-MM-dd') : ''}"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <label>工作描述</label>
+        <br><br>
+        <textarea name="description" th:text="${experience.description}"
+                  placeholder="工作内容描述"
+                  style="width:100%;padding:15px"></textarea>
+        <br><br>
+
+        <button>保存</button>
+    </form>
+</div>
+
+</body>
+</html>

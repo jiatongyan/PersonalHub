@@ -33,5 +33,29 @@ public class ExperienceService {
 
     }
 
+    public Experience getById(Long id){
+
+        return experienceMapper.findById(id);
+
+    }
+
+    public void save(Experience experience){
+
+        experienceMapper.insert(experience);
+
+    }
+
+    public void update(Experience experience){
+
+        experienceMapper.update(experience);
+
+    }
+
+    public void delete(Long id){
+
+        experienceMapper.deleteById(id);
+
+    }
+
 
 }

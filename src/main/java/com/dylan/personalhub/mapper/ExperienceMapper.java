@@ -9,4 +9,12 @@ public interface ExperienceMapper {
 
     List<Experience> findAll();
 
+    Experience findById(Long id);
+
+    void insert(Experience experience);
+
+    void update(Experience experience);
+
+    void deleteById(Long id);
+
 }

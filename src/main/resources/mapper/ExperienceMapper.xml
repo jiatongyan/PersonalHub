@@ -14,29 +14,77 @@
 
 
         SELECT
-
             id,
-
             company,
-
             department,
-
             position,
-
             start_time,
-
             end_time,
-
             description
-
-
         FROM experience
-
-
         ORDER BY start_time DESC
 
 
     </select>
+
+
+    <select id="findById"
+            resultType="com.dylan.personalhub.entity.Experience">
+
+        SELECT
+
+            id,
+            company,
+            department,
+            position,
+            start_time,
+            end_time,
+            description
+        FROM experience
+        WHERE id = #{id}
+
+    </select>
+
+
+    <insert id="insert">
+        INSERT INTO experience
+        (
+            company,
+            department,
+            position,
+            start_time,
+            end_time,
+            description
+        )
+        VALUES
+            (
+                #{company},
+                #{department},
+                #{position},
+                #{startTime},
+                #{endTime},
+                #{description}
+            )
+    </insert>
+
+
+    <update id="update">
+        UPDATE experience
+        SET
+            company     = #{company},
+            department  = #{department},
+            position    = #{position},
+            start_time  = #{startTime},
+            end_time    = #{endTime},
+            description = #{description}
+        WHERE id = #{id}
+    </update>
+
+
+    <delete id="deleteById">
+        DELETE FROM experience
+        WHERE id = #{id}
+    </delete>
 
 
 </mapper>
