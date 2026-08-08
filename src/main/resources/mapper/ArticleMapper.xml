@@ -30,6 +30,17 @@
             )
     </insert>
 
+    <update id="update">
+        UPDATE article
+        SET
+            title       = #{title},
+            summary     = #{summary},
+            content     = #{content},
+            category    = #{category},
+            cover       = #{cover},
+            update_time = NOW()
+        WHERE id = #{id}
+    </update>
 
     <select id="findAll"
             resultType="com.dylan.personalhub.entity.Article">

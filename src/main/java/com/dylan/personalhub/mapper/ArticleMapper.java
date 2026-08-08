@@ -13,4 +13,6 @@ public interface ArticleMapper {
 
     void insert(Article article);
 
+    void update(Article article);
+
 }

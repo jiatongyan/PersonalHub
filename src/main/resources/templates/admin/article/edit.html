@@ -7,15 +7,19 @@
 </head>
 <body>
 <div class="content">
-    <h1>新增文章</h1>
+    <h1 th:text="${article.id == null ? '新增文章' : '编辑文章'}">新增文章</h1>
 
     <form method="post" action="/admin/article/save">
+        <input type="hidden" name="id" th:value="${article.id}">
+
         <input name="title"
+               th:value="${article.title}"
                placeholder="文章标题"
                style="width:100%;padding:15px">
         <br><br>
 
         <input name="summary"
+               th:value="${article.summary}"
                placeholder="文章摘要"
                style="width:100%;padding:15px">
         <br><br>
@@ -24,10 +28,13 @@
         <label>文章封面</label>
         <br><br>
         <input id="cover" name="cover"
+               th:value="${article.cover}"
                placeholder="封面图片地址（可手动输入，或点击下方按钮上传）"
                style="width:100%;padding:15px">
         <br><br>
         <img id="coverPreview" src="" alt="封面预览"
+             th:if="${article.cover != null and !#strings.isEmpty(article.cover)}"
+             th:src="${article.cover}"
              style="display:none;max-width:320px;border-radius:12px;margin-bottom:10px">
         <br>
         <button type="button" id="uploadCoverBtn">上传封面图片</button>
@@ -35,11 +42,12 @@
         <br><br>
 
         <input name="category"
+               th:value="${article.category}"
                placeholder="分类，例如 AI / 历史"
                style="width:100%;padding:15px">
         <br><br>
 
-        <textarea id="content" name="content"></textarea>
+        <textarea id="content" name="content" th:text="${article.content}"></textarea>
         <br>
 
         <button>保存</button>
@@ -98,6 +106,12 @@
     const coverFile = document.getElementById("coverFile");
     const coverPreview = document.getElementById("coverPreview");
     const uploadCoverBtn = document.getElementById("uploadCoverBtn");
+
+    // 编辑时回显已有封面
+    if (coverInput.value) {
+        coverPreview.src = coverInput.value;
+        coverPreview.style.display = "block";
+    }
 
     uploadCoverBtn.addEventListener("click", function () {
         coverFile.click();

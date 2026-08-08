@@ -48,5 +48,11 @@ public class ArticleService {
 
     }
 
+    public void update(Article article){
+
+        articleMapper.update(article);
+
+    }
+
 
 }

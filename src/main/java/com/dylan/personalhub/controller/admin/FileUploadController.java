@@ -16,6 +16,8 @@ public class FileUploadController {
     private static final String UPLOAD_PATH = System.getProperty("user.dir") + "/uploads/images/";
 
     @PostMapping("/image")
+
+
     public String upload(@RequestParam("file") MultipartFile file)
             throws IOException {
 

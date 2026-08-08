@@ -53,12 +53,37 @@ public class AdminArticleController {
 
 
     /**
-     * 保存文章
+     * 编辑页面
+     */
+    @GetMapping("/edit/{id}")
+    public String editPage(
+            @PathVariable Long id,
+            Model model
+    ){
+
+        model.addAttribute(
+                "article",
+                articleService.getById(id)
+        );
+
+        return "admin/article/edit";
+
+    }
+
+
+
+    /**
+     * 保存文章：id 为空则新增，否则更新
      */
     @PostMapping("/save")
     public String save(Article article){
 
-        articleService.save(article);
+        if (article.getId() == null) {
+            articleService.save(article);
+        } else {
+            articleService.update(article);
+        }
+
         return "redirect:/admin/article";
 
     }
