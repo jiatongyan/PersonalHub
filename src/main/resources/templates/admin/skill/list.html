@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>技能管理</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+
+<body>
+
+<div class="content">
+    <h1>技能管理</h1>
+    <a href="/admin/skill/create"><button>新增技能</button></a>
+    <table>
+        <tr>
+            <th>技能</th>
+            <th>分类</th>
+            <th>等级</th>
+            <th>操作</th>
+        </tr>
+
+        <tr th:each="skill:${skills}">
+            <td th:text="${skill.name}">Java</td>
+            <td th:text="${skill.category}">Backend</td>
+            <td th:text="${skill.level}">4</td>
+            <td>
+                <a th:href="@{'/admin/skill/edit/' + ${skill.id}}">编辑</a>
+                <form th:action="@{'/admin/skill/delete/' + ${skill.id}}"
+                      method="post"
+                      style="display:inline"
+                      onsubmit="return confirm('确定要删除这个技能吗？');">
+                    <button type="submit">删除</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+
+</html>

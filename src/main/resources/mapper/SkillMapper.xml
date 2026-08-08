@@ -34,5 +34,61 @@
 
     </select>
 
+    <select id="findById"
+            resultType="com.dylan.personalhub.entity.Skill">
+
+        SELECT
+
+            id,
+
+            name,
+
+            level,
+
+            category,
+
+            description
+
+        FROM skill
+
+        WHERE id = #{id}
+
+    </select>
+
+
+    <insert id="insert">
+        INSERT INTO skill
+        (
+            name,
+            level,
+            category,
+            description
+        )
+        VALUES
+            (
+                #{name},
+                #{level},
+                #{category},
+                #{description}
+            )
+    </insert>
+
+
+    <update id="update">
+        UPDATE skill
+        SET
+            name        = #{name},
+            level       = #{level},
+            category    = #{category},
+            description = #{description}
+        WHERE id = #{id}
+    </update>
+
+
+    <delete id="deleteById">
+        DELETE FROM skill
+        WHERE id = #{id}
+    </delete>
+
 
 </mapper>

@@ -10,4 +10,12 @@ public interface SkillMapper {
 
     List<Skill> findAll();
 
+    Skill findById(Long id);
+
+    void insert(Skill skill);
+
+    void update(Skill skill);
+
+    void deleteById(Long id);
+
 }
