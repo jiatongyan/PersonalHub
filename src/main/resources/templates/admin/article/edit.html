@@ -20,9 +20,18 @@
                style="width:100%;padding:15px">
         <br><br>
 
-        <input name="cover"
-                placeholder="文章封面图片地址"
-                style="width:100%;padding:15px">
+        <!-- 封面：支持手动输入，也支持上传 -->
+        <label>文章封面</label>
+        <br><br>
+        <input id="cover" name="cover"
+               placeholder="封面图片地址（可手动输入，或点击下方按钮上传）"
+               style="width:100%;padding:15px">
+        <br><br>
+        <img id="coverPreview" src="" alt="封面预览"
+             style="display:none;max-width:320px;border-radius:12px;margin-bottom:10px">
+        <br>
+        <button type="button" id="uploadCoverBtn">上传封面图片</button>
+        <input type="file" id="coverFile" accept="image/*" style="display:none">
         <br><br>
 
         <input name="category"
@@ -37,52 +46,86 @@
     </form>
 </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
-    <script>
-        let editor = new EasyMDE({
-            element: document.getElementById("content"),
-            spellChecker: false,
-            toolbar: [
-                "bold",
-                "italic",
-                "heading",
-                "|",
-                "quote",
-                "unordered-list",
-                "ordered-list",
-                "|",
-                "link",
-                {
-                    name: "upload-image",
-                    action: function (editor) {
-                        let input = document.createElement("input");
-                        input.type = "file";
-                        input.accept = "image/*";
+<script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+<script>
+    let editor = new EasyMDE({
+        element: document.getElementById("content"),
+        spellChecker: false,
+        toolbar: [
+            "bold",
+            "italic",
+            "heading",
+            "|",
+            "quote",
+            "unordered-list",
+            "ordered-list",
+            "|",
+            "link",
+            {
+                name: "upload-image",
+                action: function (editor) {
+                    let input = document.createElement("input");
+                    input.type = "file";
+                    input.accept = "image/*";
 
-                        input.onchange = function () {
-                            let file = input.files[0];
-                            let formData = new FormData();
-                            formData.append("file", file);
+                    input.onchange = function () {
+                        let file = input.files[0];
+                        let formData = new FormData();
+                        formData.append("file", file);
 
-                            fetch("/admin/upload/image", {
-                                method: "POST",
-                                body: formData
-                            })
-                            .then(res => res.text())
-                            .then(url => {
-                                let cm = editor.codemirror;
-                                let text = cm.getSelection();
-                                cm.replaceSelection(`![${text || "image"}](${url})`);
-                            });
-                        };
+                        fetch("/admin/upload/image", {
+                            method: "POST",
+                            body: formData
+                        })
+                        .then(res => res.text())
+                        .then(url => {
+                            let cm = editor.codemirror;
+                            let text = cm.getSelection();
+                            cm.replaceSelection(`![${text || "image"}](${url})`);
+                        });
+                    };
 
-                        input.click();
-                    },
-                    icon: "📷",
-                    title: "上传图片"
-                }
-            ]
+                    input.click();
+                },
+                icon: "📷",
+                title: "上传图片"
+            }
+        ]
+    });
+
+    // ===== 封面图片上传 =====
+    const coverInput = document.getElementById("cover");
+    const coverFile = document.getElementById("coverFile");
+    const coverPreview = document.getElementById("coverPreview");
+    const uploadCoverBtn = document.getElementById("uploadCoverBtn");
+
+    uploadCoverBtn.addEventListener("click", function () {
+        coverFile.click();
+    });
+
+    coverFile.addEventListener("change", function () {
+        const file = coverFile.files[0];
+        if (!file) {
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        fetch("/admin/upload/image", {
+            method: "POST",
+            body: formData
+        })
+        .then(res => res.text())
+        .then(url => {
+            coverInput.value = url;
+            coverPreview.src = url;
+            coverPreview.style.display = "block";
+        })
+        .catch(err => {
+            alert("封面上传失败：" + err);
         });
-    </script>
-    </body>
-    </html>
+    });
+</script>
+</body>
+</html>

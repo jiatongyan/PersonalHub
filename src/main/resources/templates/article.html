@@ -11,15 +11,22 @@
 
 <body>
 
-<section>
-    <h1 th:text="${article.title}">标题</h1>
-    <p>
-        分类：
-        <span th:text="${article.category}">AI</span>
-    </p>
-    <hr>
-    <div class="markdown-body" th:utext="${content}"></div>
-</section>
+    <section>
+        <h1 th:text="${article.title}">标题</h1>
+        <p>
+            分类：
+            <span th:text="${article.category}">AI</span>
+        </p>
+
+        <!-- 文章封面 -->
+        <img th:if="${article.cover != null and !#strings.isEmpty(article.cover)}"
+             th:src="${article.cover}"
+             alt="封面"
+             style="max-width:100%;border-radius:12px;margin:20px 0;">
+
+        <hr>
+        <div class="markdown-body" th:utext="${content}"></div>
+    </section>
 
 </body>
 

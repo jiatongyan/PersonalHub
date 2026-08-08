@@ -33,15 +33,8 @@ public class AdminArticleController {
     @GetMapping
     public String list(Model model){
 
-
-        model.addAttribute(
-                "articles",
-                articleService.findAll()
-        );
-
-
+        model.addAttribute("articles", articleService.findAll());
         return "admin/article/list";
-
     }
 
 
@@ -50,16 +43,9 @@ public class AdminArticleController {
      * 新建页面
      */
     @GetMapping("/create")
-    public String createPage(
-            Model model
-    ){
+    public String createPage(Model model){
 
-        model.addAttribute(
-                "article",
-                new Article()
-        );
-
-
+        model.addAttribute("article", new Article());
         return "admin/article/edit";
 
     }
@@ -70,14 +56,9 @@ public class AdminArticleController {
      * 保存文章
      */
     @PostMapping("/save")
-    public String save(
-            Article article
-    ){
-
+    public String save(Article article){
 
         articleService.save(article);
-
-
         return "redirect:/admin/article";
 
     }
