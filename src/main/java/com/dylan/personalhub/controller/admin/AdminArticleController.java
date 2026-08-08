@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-
+/**
+ * 后台——文章管理
+ */
 @Controller
 @RequestMapping("/admin/article")
 public class AdminArticleController {

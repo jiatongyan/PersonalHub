@@ -24,7 +24,7 @@
             <tr th:each="article:${articles}">
                 <td th:text="${article.title}">标题</td>
                 <td th:text="${article.category}">AI</td>
-                <td th:text="${article.createTime}">时间</td>
+                <td th:text="${article.updateTime}">时间</td>
                 <td>
                     <a th:href="@{'/admin/article/edit/' + ${article.id}}">编辑</a>
                 </td>
