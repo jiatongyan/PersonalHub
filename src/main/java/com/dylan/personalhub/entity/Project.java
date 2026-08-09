@@ -25,5 +25,7 @@ public class Project {
 
     private LocalDateTime createTime;
 
+    private LocalDateTime updateTime;
+
 
 }

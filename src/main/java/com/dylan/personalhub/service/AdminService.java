@@ -22,7 +22,10 @@ public class AdminService {
 
 
 
-    public boolean login(
+    /**
+     * 登录校验，成功返回用户对象，失败返回 null
+     */
+    public AdminUser login(
             String username,
             String password
     ){
@@ -34,13 +37,18 @@ public class AdminService {
 
         if(user==null){
 
-            return false;
+            return null;
 
         }
 
 
-        return user.getPassword()
-                .equals(password);
+        if (user.getPassword().equals(password)) {
+            // 不把密码带到 session 中
+            user.setPassword(null);
+            return user;
+        }
+
+        return null;
 
 
     }

@@ -1,6 +1,8 @@
 package com.dylan.personalhub.controller.admin;
 
+import com.dylan.personalhub.entity.AdminUser;
 import com.dylan.personalhub.service.AdminService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,15 +18,23 @@ public class AdminController {
     }
 
     @GetMapping("/login")
-    public String loginPage() {
+    public String loginPage(HttpSession session) {
+        // 已登录则直接进入后台
+        if (session.getAttribute("adminUser") != null) {
+            return "redirect:/admin/dashboard";
+        }
         return "admin/login";
     }
 
     @PostMapping("/login")
     public String login(@RequestParam String username,
                         @RequestParam String password,
-                        Model model) {
-        if (service.login(username, password)) {
+                        Model model,
+                        HttpSession session) {
+        AdminUser user = service.login(username, password);
+
+        if (user != null) {
+            session.setAttribute("adminUser", user);
             return "redirect:/admin/dashboard";
         }
 
@@ -32,8 +42,14 @@ public class AdminController {
         return "admin/login";
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/admin/login";
+    }
+
     @GetMapping("/dashboard")
-    public String dashboard(Model model){
+    public String dashboard(Model model) {
         return "admin/dashboard";
     }
 }

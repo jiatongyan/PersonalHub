@@ -31,13 +31,15 @@
 
             status,
 
-            create_time
+            create_time,
+
+            update_time
 
 
         FROM project
 
 
-        ORDER BY create_time DESC
+        ORDER BY update_time DESC
 
 
     </select>
@@ -64,7 +66,9 @@
 
             status,
 
-            create_time
+            create_time,
+
+            update_time
 
         FROM project
 
@@ -83,7 +87,8 @@
             image,
             category,
             status,
-            create_time
+            create_time,
+            update_time
         )
         VALUES
         (
@@ -94,6 +99,7 @@
             #{image},
             #{category},
             #{status},
+            NOW(),
             NOW()
         )
     </insert>
@@ -108,7 +114,8 @@
             github_url  = #{githubUrl},
             image       = #{image},
             category    = #{category},
-            status      = #{status}
+            status      = #{status},
+            update_time = NOW()
         WHERE id = #{id}
     </update>
 

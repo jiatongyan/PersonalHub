@@ -63,7 +63,7 @@
 
         FROM article
 
-        ORDER BY create_time DESC
+        ORDER BY update_time DESC
 
 
     </select>
