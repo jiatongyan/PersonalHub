@@ -7,6 +7,7 @@
 <body>
 <div class="content">
     <h1 th:text="${project.id == null ? '新增项目' : '编辑项目'}">新增项目</h1>
+    <a href="/admin/dashboard"><button class="secondary">← 返回 Dashboard</button></a>
 
     <form method="post" action="/admin/project/save">
         <input type="hidden" name="id" th:value="${project.id}">
