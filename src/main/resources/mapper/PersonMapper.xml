@@ -30,4 +30,45 @@
     </select>
 
 
+    <insert id="insert">
+        INSERT INTO person
+        (
+            name,
+            title,
+            description,
+            about,
+            label,
+            email,
+            github,
+            avatar
+        )
+        VALUES
+        (
+            #{name},
+            #{title},
+            #{description},
+            #{about},
+            #{label},
+            #{email},
+            #{github},
+            #{avatar}
+        )
+    </insert>
+
+
+    <update id="update">
+        UPDATE person
+        SET
+            name        = #{name},
+            title       = #{title},
+            description = #{description},
+            about       = #{about},
+            label       = #{label},
+            email       = #{email},
+            github      = #{github},
+            avatar      = #{avatar}
+        WHERE id = #{id}
+    </update>
+
+
 </mapper>

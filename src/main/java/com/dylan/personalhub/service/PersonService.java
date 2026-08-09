@@ -27,4 +27,16 @@ public class PersonService {
 
     }
 
+    public void save(Person person){
+
+        personMapper.insert(person);
+
+    }
+
+    public void update(Person person){
+
+        personMapper.update(person);
+
+    }
+
 }

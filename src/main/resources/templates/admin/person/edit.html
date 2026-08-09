@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息管理</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<div class="content">
+    <h1 th:text="${person.id == null ? '新增个人信息' : '编辑个人信息'}">编辑个人信息</h1>
+
+    <form method="post" action="/admin/person/save">
+        <input type="hidden" name="id" th:value="${person.id}">
+
+        <label>姓名</label>
+        <br><br>
+        <input name="name" th:value="${person.name}"
+               placeholder="姓名，例如 Dylan Yan"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <label>头衔</label>
+        <br><br>
+        <input name="title" th:value="${person.title}"
+               placeholder="头衔，例如 AI Engineer"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <label>关于（Hero 区简短介绍）</label>
+        <br><br>
+        <input name="about" th:value="${person.about}"
+               placeholder="一句话介绍"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <label>详细描述</label>
+        <br><br>
+        <textarea name="description" th:text="${person.description}"
+                  placeholder="关于我的详细描述"
+                  style="width:100%;padding:15px"></textarea>
+        <br><br>
+
+        <label>个人标签（用逗号分隔）</label>
+        <br><br>
+        <input name="label" th:value="${person.label}"
+               placeholder="标签，例如 Deep Learning,NLP,LLM"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <label>邮箱</label>
+        <br><br>
+        <input name="email" th:value="${person.email}"
+               placeholder="email@example.com"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <label>GitHub</label>
+        <br><br>
+        <input name="github" th:value="${person.github}"
+               placeholder="https://github.com/xxx"
+               style="width:100%;padding:15px">
+        <br><br>
+
+        <!-- 头像：支持手动输入，也支持上传 -->
+        <label>头像</label>
+        <br><br>
+        <input id="avatar" name="avatar" th:value="${person.avatar}"
+               placeholder="头像图片地址（可手动输入，或点击下方按钮上传）"
+               style="width:100%;padding:15px">
+        <br><br>
+        <img id="avatarPreview" src="" alt="头像预览"
+             th:if="${person.avatar != null and !#strings.isEmpty(person.avatar)}"
+             th:src="${person.avatar}"
+             style="display:none;max-width:160px;border-radius:50%;margin-bottom:10px">
+        <br>
+        <button type="button" id="uploadAvatarBtn">上传头像图片</button>
+        <input type="file" id="avatarFile" accept="image/*" style="display:none">
+        <br><br>
+
+        <button>保存</button>
+    </form>
+</div>
+
+<script>
+    // ===== 头像图片上传 =====
+    const avatarInput = document.getElementById("avatar");
+    const avatarFile = document.getElementById("avatarFile");
+    const avatarPreview = document.getElementById("avatarPreview");
+    const uploadAvatarBtn = document.getElementById("uploadAvatarBtn");
+
+    // 编辑时回显已有头像
+    if (avatarInput.value) {
+        avatarPreview.src = avatarInput.value;
+        avatarPreview.style.display = "block";
+    }
+
+    uploadAvatarBtn.addEventListener("click", function () {
+        avatarFile.click();
+    });
+
+    avatarFile.addEventListener("change", function () {
+        const file = avatarFile.files[0];
+        if (!file) {
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        fetch("/admin/upload/image", {
+            method: "POST",
+            body: formData
+        })
+            .then(res => res.text())
+            .then(url => {
+                avatarInput.value = url;
+                avatarPreview.src = url;
+                avatarPreview.style.display = "block";
+            })
+            .catch(err => {
+                alert("头像上传失败：" + err);
+            });
+    });
+</script>
+</body>
+</html>

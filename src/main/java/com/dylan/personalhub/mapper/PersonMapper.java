@@ -10,4 +10,8 @@ public interface PersonMapper {
 
     Person findFirst();
 
+    void insert(Person person);
+
+    void update(Person person);
+
 }
