@@ -34,6 +34,7 @@
                       method="post"
                       style="display:inline"
                       onsubmit="return confirm('确定要删除这个项目吗？');">
+                    <input type="hidden" name="_csrf" th:value="${session.csrfToken}">
                     <button type="submit">删除</button>
                 </form>
             </td>

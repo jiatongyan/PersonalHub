@@ -11,6 +11,7 @@
 
     <form method="post" action="/admin/project/save">
         <input type="hidden" name="id" th:value="${project.id}">
+        <input type="hidden" name="_csrf" th:value="${session.csrfToken}">
 
         <label>项目名称</label>
         <br><br>

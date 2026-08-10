@@ -12,6 +12,7 @@
 
     <form method="post" action="/admin/person/save">
         <input type="hidden" name="id" th:value="${person.id}">
+        <input type="hidden" name="_csrf" th:value="${session.csrfToken}">
 
         <label>姓名</label>
         <br><br>

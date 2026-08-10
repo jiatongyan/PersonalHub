@@ -12,6 +12,7 @@
 
     <form method="post" action="/admin/article/save">
         <input type="hidden" name="id" th:value="${article.id}">
+        <input type="hidden" name="_csrf" th:value="${session.csrfToken}">
 
         <input name="title"
                th:value="${article.title}"

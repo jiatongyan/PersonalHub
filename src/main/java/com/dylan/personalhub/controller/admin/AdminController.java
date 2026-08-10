@@ -2,10 +2,13 @@ package com.dylan.personalhub.controller.admin;
 
 import com.dylan.personalhub.entity.AdminUser;
 import com.dylan.personalhub.service.AdminService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin")
@@ -30,11 +33,19 @@ public class AdminController {
     public String login(@RequestParam String username,
                         @RequestParam String password,
                         Model model,
-                        HttpSession session) {
+                        HttpServletRequest request) {
         AdminUser user = service.login(username, password);
 
         if (user != null) {
-            session.setAttribute("adminUser", user);
+            // 防止会话固定攻击：销毁旧 session，创建新的
+            HttpSession oldSession = request.getSession(false);
+            if (oldSession != null) {
+                oldSession.invalidate();
+            }
+            HttpSession newSession = request.getSession(true);
+            newSession.setAttribute("adminUser", user);
+            // 生成 CSRF Token
+            newSession.setAttribute("csrfToken", UUID.randomUUID().toString());
             return "redirect:/admin/dashboard";
         }
 
@@ -42,7 +53,7 @@ public class AdminController {
         return "admin/login";
     }
 
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/admin/login";

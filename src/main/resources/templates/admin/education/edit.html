@@ -11,6 +11,7 @@
 
     <form method="post" action="/admin/education/save">
         <input type="hidden" name="id" th:value="${education.id}">
+        <input type="hidden" name="_csrf" th:value="${session.csrfToken}">
 
         <label>学校</label>
         <br><br>
