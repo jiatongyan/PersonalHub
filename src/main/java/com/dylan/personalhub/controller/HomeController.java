@@ -38,10 +38,12 @@ public class HomeController {
     public String index(Model model){
 
 
-        model.addAttribute(
-                "person",
-                personService.getPerson()
-        );
+        // person 表可能为空，提供空对象防止模板 空指针异常
+        var person = personService.getPerson();
+        if (person == null) {
+            person = new com.dylan.personalhub.entity.Person();
+        }
+        model.addAttribute("person", person);
 
 
         model.addAttribute(

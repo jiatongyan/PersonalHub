@@ -9,6 +9,10 @@
     <h1 th:text="${experience.id == null ? '新增工作经历' : '编辑工作经历'}">新增工作经历</h1>
     <a href="/admin/dashboard"><button class="secondary">← 返回 Dashboard</button></a>
 
+    <div th:if="${#fields.hasErrors('*')}" style="color:#d33;background:#fff0f0;padding:12px;border-radius:8px;margin:15px 0">
+        <p th:each="err : ${#fields.allErrors()}" th:text="${err.defaultMessage}" style="margin:0"></p>
+    </div>
+
     <form method="post" action="/admin/experience/save">
         <input type="hidden" name="id" th:value="${experience.id}">
         <input type="hidden" name="_csrf" th:value="${session.csrfToken}">

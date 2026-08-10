@@ -3,8 +3,10 @@ package com.dylan.personalhub.controller.admin;
 
 import com.dylan.personalhub.entity.Article;
 import com.dylan.personalhub.service.ArticleService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -66,7 +68,11 @@ public class AdminArticleController {
      * 保存文章：id 为空则新增，否则更新
      */
     @PostMapping("/save")
-    public String save(Article article){
+    public String save(@Valid Article article, BindingResult result){
+
+        if (result.hasErrors()) {
+            return "admin/article/edit";
+        }
 
         if (article.getId() == null) {
             articleService.save(article);

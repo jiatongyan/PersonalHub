@@ -3,8 +3,10 @@ package com.dylan.personalhub.controller.admin;
 
 import com.dylan.personalhub.entity.Project;
 import com.dylan.personalhub.service.ProjectService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -65,7 +67,11 @@ public class AdminProjectController {
      * 保存项目：id 为空则新增，否则更新
      */
     @PostMapping("/save")
-    public String save(Project project){
+    public String save(@Valid Project project, BindingResult result){
+
+        if (result.hasErrors()) {
+            return "admin/project/edit";
+        }
 
         if (project.getId() == null) {
             projectService.save(project);

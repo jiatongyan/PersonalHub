@@ -3,8 +3,10 @@ package com.dylan.personalhub.controller.admin;
 
 import com.dylan.personalhub.entity.Experience;
 import com.dylan.personalhub.service.ExperienceService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -65,7 +67,11 @@ public class AdminExperienceController {
      * 保存经历：id 为空则新增，否则更新
      */
     @PostMapping("/save")
-    public String save(Experience experience){
+    public String save(@Valid Experience experience, BindingResult result){
+
+        if (result.hasErrors()) {
+            return "admin/experience/edit";
+        }
 
         if (experience.getId() == null) {
             experienceService.save(experience);

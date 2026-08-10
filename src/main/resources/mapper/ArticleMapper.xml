@@ -7,7 +7,7 @@
 
 
 <mapper namespace="com.dylan.personalhub.mapper.ArticleMapper">
-    <insert id="insert">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO article
         (
             title,

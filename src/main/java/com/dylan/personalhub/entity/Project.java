@@ -1,5 +1,6 @@
 package com.dylan.personalhub.entity;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import java.time.LocalDateTime;
 
@@ -9,8 +10,10 @@ public class Project {
 
     private Long id;
 
+    @NotBlank(message = "项目名称不能为空")
     private String name;
 
+    @NotBlank(message = "项目描述不能为空")
     private String description;
 
     private String techStack;

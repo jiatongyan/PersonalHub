@@ -3,8 +3,10 @@ package com.dylan.personalhub.controller.admin;
 
 import com.dylan.personalhub.entity.Education;
 import com.dylan.personalhub.service.EducationService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -66,7 +68,11 @@ public class AdminEducationController {
      * 保存教育经历：id 为空则新增，否则更新
      */
     @PostMapping("/save")
-    public String save(Education education){
+    public String save(@Valid Education education, BindingResult result){
+
+        if (result.hasErrors()) {
+            return "admin/education/edit";
+        }
 
         if (education.getId() == null) {
             educationService.save(education);

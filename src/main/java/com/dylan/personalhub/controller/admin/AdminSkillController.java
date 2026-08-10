@@ -3,8 +3,10 @@ package com.dylan.personalhub.controller.admin;
 
 import com.dylan.personalhub.entity.Skill;
 import com.dylan.personalhub.service.SkillService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -65,7 +67,11 @@ public class AdminSkillController {
      * 保存技能：id 为空则新增，否则更新
      */
     @PostMapping("/save")
-    public String save(Skill skill){
+    public String save(@Valid Skill skill, BindingResult result){
+
+        if (result.hasErrors()) {
+            return "admin/skill/edit";
+        }
 
         if (skill.getId() == null) {
             skillService.save(skill);
