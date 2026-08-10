@@ -23,7 +23,7 @@ public class LoginInterceptor implements HandlerInterceptor {
                              HttpServletResponse response,
                              Object handler) throws Exception {
 
-        // 排除登录请求
+        // 登录页放行
         String path = request.getRequestURI();
         if (path.equals("/admin/login")) {
             return true;
@@ -40,6 +40,11 @@ public class LoginInterceptor implements HandlerInterceptor {
         // 确保 session 中有 CSRF Token（首次访问时生成）
         if (session.getAttribute("csrfToken") == null) {
             session.setAttribute("csrfToken", UUID.randomUUID().toString());
+        }
+
+        // 文件上传接口由 JS fetch 调用，无法携带 CSRF，跳过校验
+        if (path.startsWith("/admin/upload/")) {
+            return true;
         }
 
         // POST / PUT / DELETE 请求校验 CSRF Token

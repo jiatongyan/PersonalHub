@@ -18,7 +18,7 @@ public class FileUploadController {
 
     private static final Logger log = LoggerFactory.getLogger(FileUploadController.class);
 
-    @Value("${app.upload.path:uploads/images}")
+    @Value("${app.upload.path}")
     private String uploadPath;
 
     @PostMapping("/image")
@@ -28,7 +28,7 @@ public class FileUploadController {
         log.info("收到上传请求: fileName={}, size={} bytes",
                 file.getOriginalFilename(), file.getSize());
 
-        // 确保路径以分隔符结尾
+        // 路径：使用配置的绝对路径
         String basePath = uploadPath;
         if (!basePath.endsWith("/") && !basePath.endsWith("\\")) {
             basePath += File.separator;

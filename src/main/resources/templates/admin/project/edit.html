@@ -9,11 +9,11 @@
     <h1 th:text="${project.id == null ? '新增项目' : '编辑项目'}">新增项目</h1>
     <a href="/admin/dashboard"><button class="secondary">← 返回 Dashboard</button></a>
 
-    <div th:if="${#fields.hasErrors('*')}" style="color:#d33;background:#fff0f0;padding:12px;border-radius:8px;margin:15px 0">
-        <p th:each="err : ${#fields.allErrors()}" th:text="${err.defaultMessage}" style="margin:0"></p>
-    </div>
+    <form method="post" action="/admin/project/save" th:object="${project}">
+        <div th:if="${#fields.hasErrors('*')}" style="color:#d33;background:#fff0f0;padding:12px;border-radius:8px;margin:15px 0">
+            <p th:each="err : ${#fields.allErrors()}" th:text="${err.defaultMessage}" style="margin:0"></p>
+        </div>
 
-    <form method="post" action="/admin/project/save">
         <input type="hidden" name="id" th:value="${project.id}">
         <input type="hidden" name="_csrf" th:value="${session.csrfToken}">
 
