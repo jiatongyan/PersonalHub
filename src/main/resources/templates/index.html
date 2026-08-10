@@ -66,7 +66,9 @@
                 <div class="timeline-date">
                     <span th:text="${#temporals.format(edu.startTime,'yyyy-MM')}">2023-09</span>
                     -
-                    <span th:text="${#temporals.format(edu.endTime,'yyyy-MM')}">2026-06</span>
+                    <span th:if="${edu.endTime!=null}"
+                          th:text="${#temporals.format(edu.endTime,'yyyy-MM')}">2026-06</span>
+                    <span th:if="${edu.endTime==null}">至今</span>
                 </div>
                 <h4 th:text="${edu.school}">中国地质大学（北京）</h4>
                 <h5>
