@@ -144,6 +144,29 @@ h2 {
 }
 
 /* =====================
+   关于我
+===================== */
+
+#about p {
+    max-width: 1200px;
+    font-size: 18px;
+    line-height: 2;
+    color: #555;
+    /* 保留后台描述里的换行，段落自然分段 */
+    white-space: pre-line;
+    margin: 0 0 30px;
+}
+
+#about .tags {
+    margin-top: 5px;
+}
+
+#about .tags span {
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+/* =====================
    标签
 ===================== */
 
